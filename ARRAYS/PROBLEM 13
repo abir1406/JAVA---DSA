@@ -1,4 +1,4 @@
-# Longest subarray with sum K
+# Longest subarray with given sum K(positives)
 
 class Solution {
     public int longestSubarray(int[] nums, int k) {
@@ -38,7 +38,6 @@ class Solution {
 
             // Store the first occurrence only
             if (!map.containsKey(sum)) {
-                
                 map.put(sum, i);
             }
         }
