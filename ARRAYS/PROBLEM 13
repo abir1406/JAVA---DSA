@@ -1,47 +1,41 @@
 # Longest subarray with given sum K(positives)
 
+
 class Solution {
     public int longestSubarray(int[] nums, int k) {
 
-        HashMap<Integer, Integer> map = new HashMap<>();
+        int left = 0;
+        int right = 0;
 
         int sum = 0;
         int maxLength = 0;
 
-        for (int i = 0; i < nums.length; i++) {
+        while (right < nums.length) {
 
-            sum = sum + nums[i];
+            sum = sum + nums[right];
 
-            // Case 1: Subarray starts from index 0
+            // If sum becomes greater than k,
+            // remove elements from the left
+            while (left <= right && sum > k) {
+
+                sum = sum - nums[left];
+                left++;
+            }
+
+            // If sum is equal to k
             if (sum == k) {
 
-                int length = i + 1;
+                int length = right - left + 1;
 
                 if (length > maxLength) {
                     maxLength = length;
                 }
             }
 
-            // Case 2: Find previous prefix sum
-            int requiredSum = sum - k;
-
-            if (map.containsKey(requiredSum)) {
-
-                int previousIndex = map.get(requiredSum);
-
-                int length = i - previousIndex;
-
-                if (length > maxLength) {
-                    maxLength = length;
-                }
-            }
-
-            // Store the first occurrence only
-            if (!map.containsKey(sum)) {
-                map.put(sum, i);
-            }
+            right++;
         }
 
         return maxLength;
     }
 }
+
