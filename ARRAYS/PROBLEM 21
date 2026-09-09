@@ -1,31 +1,29 @@
-# Leaders in an Array
-
-import java.util.*;
+# Rearrange array elements by sign
 
 class Solution {
-    public List<Integer> leaders(int[] nums) {
-
-        List<Integer> result = new ArrayList<>();
+    public int[] rearrangeArray(int[] nums) {
 
         int n = nums.length;
 
-        int maxRight = nums[n - 1];
+        int[] answer = new int[n];
 
-        // Last element is always a leader
-        result.add(nums[n - 1]);
+        int positiveIndex = 0;
+        int negativeIndex = 1;
 
-        for (int i = n - 2; i >= 0; i--) {
+        for (int i = 0; i < n; i++) {
 
-            if (nums[i] > maxRight) {
+            if (nums[i] > 0) {
 
-                result.add(nums[i]);
+                answer[positiveIndex] = nums[i];
+                positiveIndex = positiveIndex + 2;
 
-                maxRight = nums[i];
+            } else {
+
+                answer[negativeIndex] = nums[i];
+                negativeIndex = negativeIndex + 2;
             }
         }
 
-        Collections.reverse(result);
-
-        return result;
+        return answer;
     }
 }
