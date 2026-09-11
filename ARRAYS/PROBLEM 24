@@ -3,10 +3,9 @@
 import java.util.HashSet;
 
 class Solution {
-
     public int longestConsecutive(int[] nums) {
 
-        HashSet<Integer> set = new HashSet<>();
+        HashSet<Integer> set = new HashSet<Integer>();
 
         // Put all elements into HashSet
         for (int i = 0; i < nums.length; i++) {
@@ -20,16 +19,17 @@ class Solution {
 
             int current = nums[i];
 
-            // Check if current is the starting number
+            // Check if current is the START of a sequence
             if (!set.contains(current - 1)) {
 
                 int count = 1;
+                int next = current + 1;
 
                 // Find consecutive numbers
-                while (set.contains(current + 1)) {
+                while (set.contains(next)) {
 
-                    current = current + 1;
                     count = count + 1;
+                    next = next + 1;
                 }
 
                 if (count > longest) {
