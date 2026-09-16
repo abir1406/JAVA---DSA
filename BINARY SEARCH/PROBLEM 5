@@ -13,13 +13,20 @@ class Solution {
 
             int mid = low + (high - low) / 2;
 
-            // Possible floor
-            if (nums[mid] <= x) {
+            // Exact match
+            if (nums[mid] == x) {
+                floor = nums[mid];
+                ceil = nums[mid];
+                break;
+            }
+
+            // nums[mid] is smaller than x
+            else if (nums[mid] < x) {
                 floor = nums[mid];
                 low = mid + 1;
             }
 
-            // Possible ceil
+            // nums[mid] is greater than x
             else {
                 ceil = nums[mid];
                 high = mid - 1;
