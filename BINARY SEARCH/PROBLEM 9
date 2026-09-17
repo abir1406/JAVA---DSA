@@ -2,52 +2,44 @@
 
 class Solution {
     public boolean searchInARotatedSortedArrayII(int[] nums, int k) {
-
         int low = 0;
         int high = nums.length - 1;
 
-        while (low <= high) {
 
-            int mid = low + (high - low) / 2;
+     while (low <= high) {
 
-            // Target found
-            if (nums[mid] == k) {
-                return true;
+            int mid = low + (high-low)/2 ;
+
+            if ( nums [mid] == k){
+                return true ;
             }
 
-            // Duplicate values make it impossible
-            // to identify the sorted half
-            if (nums[low] == nums[mid] && nums[mid] == nums[high]) {
-                low++;
-                high--;
-                continue;
+          if (nums[low] == nums[mid] && nums[mid] == nums[high]){
+               low++ ;
+               high-- ;
+               continue ;
+          }  
+
+         if (nums[low] <= nums[mid]){
+            if (nums[low] <= k && k < nums[mid]){
+                high = mid - 1 ;
             }
-
-            // Left half is sorted
-            if (nums[low] <= nums[mid]) {
-
-                // Target lies inside the left sorted half
-                if (nums[low] <= k && k < nums[mid]) {
-                    high = mid - 1;
-                }
-                else {
-                    low = mid + 1;
-                }
-            }
-
-            // Right half is sorted
             else {
-
-                // Target lies inside the right sorted half
-                if (nums[mid] < k && k <= nums[high]) {
-                    low = mid + 1;
-                }
-                else {
-                    high = mid - 1;
-                }
+                low = mid + 1 ;
             }
-        }
+         }   
 
-        return false;
+           else {
+              if (nums[mid] < k && k <= nums[high]){
+                low = mid + 1;
+              }
+              else {
+                high = mid - 1;
+              }
+              
+              }
+        }
+        return false ;
+        
     }
 }
