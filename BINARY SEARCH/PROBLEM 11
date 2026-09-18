@@ -1,0 +1,54 @@
+# Find out how many times the array is rotated
+
+import java.util.*;
+
+class Solution {
+    public int findKRotation(ArrayList<Integer> nums) {
+
+        int low = 0;
+        int high = nums.size() - 1;
+
+        int ans = Integer.MAX_VALUE;
+        int index = -1;
+
+        while (low <= high) {
+
+            // Search space is already sorted
+            if (nums.get(low) <= nums.get(high)) {
+
+                if (nums.get(low) < ans) {
+                    ans = nums.get(low);
+                    index = low;
+                }
+
+                break;
+            }
+
+            int mid = low + (high - low) / 2;
+
+            // Left half is sorted
+            if (nums.get(low) <= nums.get(mid)) {
+
+                if (nums.get(low) < ans) {
+                    ans = nums.get(low);
+                    index = low;
+                }
+
+                low = mid + 1;
+            }
+
+            // Right half is sorted
+            else {
+
+                if (nums.get(mid) < ans) {
+                    ans = nums.get(mid);
+                    index = mid;
+                }
+
+                high = mid - 1;
+            }
+        }
+
+        return index;
+    }
+}
