@@ -1,7 +1,5 @@
 # Find out how many times the array is rotated
 
-import java.util.*;
-
 class Solution {
     public int findKRotation(ArrayList<Integer> nums) {
 
