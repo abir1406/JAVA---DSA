@@ -1,0 +1,62 @@
+#  Minimum days to make M bouquets
+
+class Solution {
+
+    private boolean canMake(int[] nums, int day, int k, int m) {
+
+        int bouquets = 0;
+        int count = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+
+            if (nums[i] <= day) {
+                count++;
+
+                if (count == k) {
+                    bouquets++;
+                    count = 0;
+                }
+            } else {
+                count = 0;
+            }
+        }
+
+        return bouquets >= m;
+    }
+
+    public int roseGarden(int n, int[] nums, int k, int m) {
+
+        // If we need m bouquets and each bouquet needs k roses
+        if ((long) m * k > n) {
+            return -1;
+        }
+
+        int low = Integer.MAX_VALUE;
+        int high = Integer.MIN_VALUE;
+
+        for (int i = 0; i < n; i++) {
+            low = Math.min(low, nums[i]);
+            high = Math.max(high, nums[i]);
+        }
+
+        while (low <= high) {
+
+            int mid = low + (high - low) / 2;
+
+            if (canMake(nums, mid, k, m)) {
+
+                // We can make the required bouquets.
+                // Try an earlier day.
+                high = mid - 1;
+
+            } else {
+
+                // We cannot make enough bouquets.
+                // Need more days.
+                low = mid + 1;
+            }
+        }
+
+        return low;
+    }
+}
