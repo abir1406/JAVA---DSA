@@ -1,0 +1,46 @@
+#LEETCODE - 349. Intersection of Two Arrays
+
+
+import java.util.*;
+
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        Arrays.sort(nums1);
+        HashSet<Integer> result = new HashSet<>();
+
+        for (int i = 0; i < nums2.length; i++) {
+            if (binarySearch(nums1, nums2[i])) {
+                result.add(nums2[i]);
+            }
+        }
+
+        int[] ans = new int[result.size()];
+        int index = 0;
+
+        for (int num : result) {
+            ans[index] = num;
+            index++;
+        }
+
+        return ans;
+    }
+
+    private boolean binarySearch(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (nums[mid] == target) {
+                return true;
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return false;
+    }
+}
