@@ -1,0 +1,12 @@
+#LEETCODE - 58. Length of Last Word
+
+//Brute force//
+class Solution {
+    public int lengthOfLastWord(String s) {
+        // Remove leading and trailing spaces, then split by one or more spaces
+        String[] words = s.trim().split("\\s+");
+        
+        // Return the length of the last element in the array
+        return words[words.length - 1].length();
+    }
+}
