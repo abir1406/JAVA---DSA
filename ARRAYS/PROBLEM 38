@@ -1,0 +1,27 @@
+#LEETCODE - 3411. Maximum Subarray With Equal Products
+
+class Solution {
+    public int maxLength(int[] nums) {
+        int n = nums.length;
+
+        int[] primes = {2, 3, 5, 7};
+        int[] last = {-1, -1, -1, -1};
+
+        int left = 0;
+        int ans = 2;
+
+        for (int right = 0; right < n; right++) {
+
+            for (int p = 0; p < primes.length; p++) {
+                if (nums[right] % primes[p] == 0) {
+                    left = Math.max(left, last[p] + 1);
+                    last[p] = right;
+                }
+            }
+
+            ans = Math.max(ans, right - left + 1);
+        }
+
+        return ans;
+    }
+}
