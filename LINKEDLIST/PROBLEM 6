@@ -1,0 +1,8 @@
+# 941. Insertion at the head of Linked List
+
+class Solution {
+    public ListNode insertAtHead(ListNode head, int X) {
+        ListNode newNode = new ListNode(X, head);
+        return newNode;
+    }
+}
