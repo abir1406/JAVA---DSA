@@ -1,0 +1,19 @@
+# 958. Insertion at the tail of Linked List
+
+class Solution {
+    public ListNode insertAtTail(ListNode head, int X) {
+    
+        if (head == null) {
+            return new ListNode(X);
+        }
+
+        ListNode temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+
+        temp.next = new ListNode(X);
+
+        return head;
+    }
+}
